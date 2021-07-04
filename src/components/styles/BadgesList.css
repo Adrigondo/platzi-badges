@@ -1,0 +1,13 @@
+.Badge__element{
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px #25252528;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.Badge__element--twitter{
+  color: #0091eb;
+}
+.Badge__element--job-title{
+  font-size: 14px;
+}

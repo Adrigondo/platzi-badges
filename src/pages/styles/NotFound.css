@@ -1,0 +1,41 @@
+.NotFound {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  background: url('../../images/stars.svg'), #1B1B25;
+  background-repeat: repeat;
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.NotFound__container{
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.NotFound__container--information{
+  max-width: 500px;
+}
+.NotFound__container--information  h4{
+  background-color: #1B1B25;
+}
+.NotFound__title{
+  font-size: 64px;
+}
+.NotFound__img{
+  width: 600px;
+}
+@media screen and (max-width: 1180px) {
+  .NotFound__container{
+    flex-direction: column;
+    text-align: center;
+  }
+  .NotFound__container--information{
+    margin-bottom: 2rem;
+  }
+}

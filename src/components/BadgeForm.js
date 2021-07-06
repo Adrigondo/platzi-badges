@@ -16,16 +16,15 @@ class BadgeForm extends React.Component{
       "Event": "Button was clicked",
     });
   }
-  handleSubmit= e =>{
-    // Prevent the sumbit of the form
-    e.preventDefault();
-    console.log(this.state);
-  }
+  // handleSubmit= e =>{
+  //   // Prevent the sumbit of the form
+  //   e.preventDefault();
+  //   console.log(this.state);
+  // }
   render(){
     return(
-        <div className="">
-          <h1>New Attendant</h1>
-          <form onSubmit={this.handleSubmit}>
+        <div >
+          <form onSubmit={this.props.onSubmit}>
             <div className="form-group">
               <label>First Name</label>
               <input
@@ -78,7 +77,14 @@ class BadgeForm extends React.Component{
             </div>
 
             {/* Si el botton es de tipo boton, no enviará el formulario, si es de tipo submit, enviará el formulario(y recargará la página por default) */}
-            <button type="submit" onClick={this.handleClick} className="btn btn-primary">Save</button>
+            <button type="submit" onClick={this.handleClick} className="btn btn-primary mt-4">Save</button>
+
+            {this.props.error &&(
+              <div className="text-center mt-2">
+                <p className="text-danger fw-bold" >{this.props.error.message}</p>
+              </div>
+            )}
+
           </form>
         </div>
     );

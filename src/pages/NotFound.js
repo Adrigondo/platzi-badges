@@ -8,8 +8,8 @@ function NotFound(){
     <div className="NotFound">
       <div className="NotFound__container">
         <div className="NotFound__container--information">
-          <h1 className="NotFound__title" >LLEGASTE A UN VACÍO EXISTENCIAL!</h1>
-          <h4>La página a la que intentaste acceder no existe.</h4>
+          <h1 className="NotFound__title" >YOU REACHED AN EXISTENTIAL VOID!</h1>
+          <h4>The page you are trying to access does not exist.</h4>
         </div>
         <img className="img-fluid NotFound__img" src={logo404} alt="404 Error: Not Found" />
       </div>

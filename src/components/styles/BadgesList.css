@@ -1,17 +1,28 @@
-.Badge__element{
+.Badge__element {
   background: white;
   border-radius: 5px;
   box-shadow: 0px 2px 3px 0px #25252528;
   padding: 15px;
   margin-bottom: 10px;
+  position: relative;
 }
-.Badge__element--img{
+.Badge__element:hover {
+  background: #eef7fa;
+}
+.Badge__element--img {
   border-radius: 50%;
   margin-right: 15px;
 }
-.Badge__element--twitter{
+.Badge__element--twitter {
   color: #0091eb;
 }
-.Badge__element--job-title{
+.Badge__element--job-title {
   font-size: 14px;
+}
+.Badge__element--link {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px 12px;
+  line-height: 16px;
 }

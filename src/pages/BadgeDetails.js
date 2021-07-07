@@ -3,17 +3,75 @@ import { Link } from "react-router-dom";
 
 import api from "../api";
 
-import "./styles/BadgeDetails.css";
-import confLogo from '../images/platziconf-logo.svg';
 import Badge from "../components/Badge";
 import PageLoading from "../components/PageLoading";
 import PageError from "../components/PageError";
+import DeleteBadgeModal from "../components/modals/DeleteBadgeModal";
 
-class BadgeDetails extends React.Component{
+import "./styles/BadgeDetails.css";
+import confLogo from '../images/platziconf-logo.svg';
+
+function BadgeDetails(props){
+  const badge=props.badge;
+  return(
+    <React.Fragment>
+      <div className="BadgeDetails__hero">
+        <div className="container">
+          <div className="row">
+            <div className="col-6">
+              <img src={confLogo} alt="Conference logo" className="img-fluid BadgeDetails__hero--img" />
+            </div>
+            <div className="col-6 BadgeDetails__hero-attendant-name">
+              <h1>{badge.firstName} {badge.lastName}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container">
+        <div className="row">
+          <div className="col-5 offset-2">
+            <Badge 
+              firstName={badge.firstName || "First Name"}
+              lastName={badge.lastName || "Last Name"}
+              jobTitle={badge.jobTitle || "Job title"}
+              twitter={badge.twitter || "platzi_student"}
+              email={badge.email}
+            />
+          </div>
+          <div className="col-3 d-flex flex-column justify-content-center align-items-center">
+            <h2>Actions</h2>
+            <div className="w-100">
+              <div className="d-grid gap-2 mb-3">
+                <Link to={`/badges/${badge.id}/edit`} className="btn btn-primary btn-lg">Edit</Link>
+              </div>
+              <div className="d-grid gap-2">
+                <button 
+                  className="btn btn-danger btn-lg"
+                  onClick={props.onOpenModal}
+                >
+                  Delete
+                </button>
+                <DeleteBadgeModal
+                  isOpen={props.modalIsOpen}
+                  onClose={props.onCloseModal}
+                  onDeleteBadge={props.onDeleteBadge}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment> 
+  )
+}
+
+class BadgeDetailsContainer extends React.Component{
   state={
     loading: true,
     error: null,
     data: undefined,
+    modalIsOpen:false,
   };
   componentDidMount(){
     this.fetchData();
@@ -37,6 +95,31 @@ class BadgeDetails extends React.Component{
       })
     }
   }
+
+  handleOpenModal = e =>{
+    this.setState({modalIsOpen:true})
+  }
+  handleCloseModal = e =>{
+    this.setState({modalIsOpen:false})
+  }
+  handleDeleteBadge=async e=>{
+    this.setState({
+      loading: true,
+      error: null,
+    })
+    try{
+      await api.badges.remove(this.props.match.params.badgeId);
+      this.setState({
+        loading: true,
+      })
+      this.props.history.push("/badges");
+    }catch(error){
+      this.setState({
+        loading: false,
+        error: error,
+      })
+    }
+  }
   render(){
     if(this.state.loading){
       return(
@@ -48,48 +131,17 @@ class BadgeDetails extends React.Component{
         <PageError error={this.state.error}/>
       );
     }
-    const badge=this.state.data;
     return(
-      <React.Fragment>
-        <div className="BadgeDetails__hero">
-          <div className="container">
-            <div className="row">
-              <div className="col-6">
-                <img src={confLogo} alt="Conference logo" className="img-fluid BadgeDetails__hero--img" />
-              </div>
-              <div className="col-6 BadgeDetails__hero-attendant-name">
-                <h1>{badge.firstName} {badge.lastName}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="container">
-          <div className="row">
-            <div className="col-6">
-              <Badge 
-                firstName={badge.firstName || "First Name"}
-                lastName={badge.lastName || "Last Name"}
-                jobTitle={badge.jobTitle || "Job title"}
-                twitter={badge.twitter || "platzi_student"}
-                email={badge.email}
-              />
-            </div>
-            <div className="col-6">
-              <h2>Actions</h2>
-              <div className="">
-                <div className="mb-4">
-                  <Link to={`/badges/${badge.id}/edit`} className="btn btn-primary">Edit</Link>
-                </div>
-                <div className="">
-                  <button className="btn btn-danger">Delete</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </React.Fragment> 
-    )
+      <BadgeDetails
+        badge={this.state.data}
+
+        onCloseModal={this.handleCloseModal}
+        onOpenModal={this.handleOpenModal}
+        modalIsOpen={this.state.modalIsOpen}
+        onDeleteBadge={this.handleDeleteBadge}
+      />
+    );
   }
 }
-export default BadgeDetails;
+
+export default BadgeDetailsContainer;

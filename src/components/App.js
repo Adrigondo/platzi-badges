@@ -9,12 +9,16 @@ import BadgeDetails from "../pages/BadgeDetails";
 import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home/> },
-  { path: "/badges", element: <Badges/> },
-  { path: "/badges/new", element: <BadgeNew/> },
-  { path: "/badges/:badgeId/edit", element: <BadgeEdit/> },
-  { path: "/badges/:badgeId", element: <BadgeDetails/> },
-  { path: "/404", element: <NotFound/> },
+  { path: "/", element: <Home /> },
+  { path: "/badges", element: <Badges /> },
+  { path: "/badges/new", element: <BadgeNew /> },
+  { path: "/badges/:badgeId/edit", element: <BadgeEdit /> },
+  { path: "/badges/:badgeId", element: <BadgeDetails /> },
+  { path: "/404", element: <NotFound /> },
+  {
+    path: '*',
+    element: <Navigate to={`/404`} />
+  }
   // { path: "*", :"/404"},
 ])
 

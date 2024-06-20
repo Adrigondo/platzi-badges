@@ -52,6 +52,9 @@ jobs:
           echo "VITE_REPO_NAME=${{ github.event.repository.name }}" >> environment/.env.production
           echo "VITE_SERVER_URL=https://platzibadgesreact-noewo1z8.b4a.run" >> environment/.env.production
       - name: Build
+        env:
+          VITE_REPO_NAME: ${{ github.event.repository.name }}
+          VITE_SERVER_URL: 'https://platzibadgesreact-noewo1z8.b4a.run'
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5

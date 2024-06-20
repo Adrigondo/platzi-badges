@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  console.log(process.env.VITE_REPO_NAME);
+  console.log(process.env);
   return {
     plugins: [
       {

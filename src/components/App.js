@@ -20,14 +20,14 @@ const router = createBrowserRouter([
   }
   // { path: "*", :"/404"},
 ], {
-  basename: import.meta.env.PROD === true
-    ? import.meta.env.VITE_REPO_NAME || '/'
+  basename: process.env.NODE_ENV === 'production'
+    ? process.env.VITE_REPO_NAME || '/'
     : '/',
 })
 
 function App() {
-  console.log("VITE_REPO_NAME:", import.meta.env.PROD === true
-    ? import.meta.env.VITE_REPO_NAME || '/'
+  console.log("VITE_REPO_NAME:", process.env.NODE_ENV === 'production'
+    ? process.env.VITE_REPO_NAME || '/'
     : '/',);
   return (
     <RouterProvider router={router} />

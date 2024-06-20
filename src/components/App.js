@@ -7,7 +7,6 @@ import BadgeNew from "../pages/BadgeNew";
 import BadgeEdit from "../pages/BadgeEdit";
 import BadgeDetails from "../pages/BadgeDetails";
 import NotFound from "../pages/NotFound";
-
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/badges", element: <Badges /> },
@@ -21,12 +20,15 @@ const router = createBrowserRouter([
   }
   // { path: "*", :"/404"},
 ], {
-  basename: import.meta.env.PROD===true
+  basename: import.meta.env.PROD === true
     ? import.meta.env.VITE_REPO_NAME || '/'
     : '/',
 })
 
 function App() {
+  console.log("VITE_REPO_NAME:", import.meta.env.PROD === true
+    ? import.meta.env.VITE_REPO_NAME || '/'
+    : '/',);
   return (
     <RouterProvider router={router} />
   );

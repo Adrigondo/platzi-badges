@@ -20,7 +20,11 @@ const router = createBrowserRouter([
     element: <Navigate to={`/404`} />
   }
   // { path: "*", :"/404"},
-])
+], {
+  basename: process.env.NODE_ENV === 'production'
+    ? process.env.REPO_NAME || '/'
+    : '/',
+})
 
 function App() {
   return (

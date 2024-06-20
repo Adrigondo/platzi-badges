@@ -25,9 +25,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
   
-env:
-  VITE_REPO_NAME: ${{ github.event.repository.name }}
-  VITE_SERVER_URL: 'https://platzibadgesreact-noewo1z8.b4a.run'
   
 jobs:
   # Single deploy job since we're just deploying
@@ -47,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
+        env:
+          VITE_REPO_NAME: ${{ github.event.repository.name }}
+          VITE_SERVER_URL: 'https://platzibadgesreact-noewo1z8.b4a.run'
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5

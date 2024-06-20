@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  console.log(process.env);
+  const env = loadEnv('', process.cwd(), '');
+  console.log(mode, env);
   return {
     plugins: [
       {
@@ -35,9 +36,9 @@ export default defineConfig(({ mode }) => {
         'src': fileURLToPath(new URL('./src', import.meta.url))
       },
     },
-    envDir: 'environment',
     base: process.env.NODE_ENV === 'production'
-      ? process.env.VITE_REPO_NAME || '/'
+      ? env.VITE_REPO_NAME || '/'
       : '/',
+    envDir: 'environment',
   }
 })

@@ -26,9 +26,7 @@ const router = createBrowserRouter([
 })
 
 function App() {
-  console.log("VITE_REPO_NAME:", process.env.NODE_ENV === 'production'
-    ? process.env.VITE_REPO_NAME || '/'
-    : '/',);
+  console.log("VITE_REPO_NAME:", process.env.VITE_REPO_NAME);
   return (
     <RouterProvider router={router} />
   );

@@ -1,5 +1,4 @@
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
-console.log("SERVER_URL", SERVER_URL);
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const randomNumber = (min = 0, max = 1) =>
   Math.floor(Math.random() * (max - min + 1)) + min;

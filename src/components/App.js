@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   // { path: "*", :"/404"},
 ], {
   basename: process.env.NODE_ENV === 'production'
-    ? import.meta.env.VITE_REPO_NAME || '/'
+    ? `/${import.meta.env.VITE_REPO_NAME}/`
     : '/',
 })
 

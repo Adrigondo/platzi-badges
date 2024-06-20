@@ -1,6 +1,6 @@
 FROM node:22
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY . .
-EXPOSE 3000
 RUN npm install
-CMD json-server --port 3000 --watch db.json
+EXPOSE 3001
+CMD port=3001 npm start

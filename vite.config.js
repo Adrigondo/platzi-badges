@@ -34,7 +34,7 @@ export default defineConfig({
     },
   },
   base: process.env.NODE_ENV === 'production'
-    ? process.env.REPO_NAME || '/uach-cp-react-course-sketch/'
+    ? process.env.REPO_NAME || '/'
     : '/',
-    
+  envDir: 'environment',
 })

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all -cp client:dev server",
-    "preview": "npm-run-all -cp client server",
-    "build": "vite build && cp dist/index.html dist/404.html",
+    "dev": "BASE_URL='http://localhost:3001' && npm-run-all -cp client:dev server",
+    "preview": "BASE_URL='http://localhost:3001' && npm-run-all -cp client server",
+    "build": "BASE_URL='https://platzibadgesreact-noewo1z8.b4a.run' && vite build && cp dist/index.html dist/404.html",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "client": "vite preview",
     "client:dev": "vite",

@@ -1,7 +1,8 @@
 const fs = require('fs');
-const path = require('path');
-const falso = require('@ngneat/falso');
-const md5 = require('md5');
+import fs from fs;
+import path from path;
+import falso from @ngneat/falso;
+import md5 from md5;
 
 function createBadges(limit = 50) {
   const result = [];

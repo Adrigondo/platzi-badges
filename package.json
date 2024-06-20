@@ -2,6 +2,7 @@
   "name": "platzi-badges",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "npm-run-all -cp client:dev server",
     "preview": "npm run client",

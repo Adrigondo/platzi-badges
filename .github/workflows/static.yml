@@ -26,7 +26,7 @@ concurrency:
   cancel-in-progress: false
   
 env:
-  VITE_REPO_NAME: '/${{ github.event.repository.name }}/'
+  VITE_REPO_NAME: ${{ github.event.repository.name }}
   VITE_SERVER_URL: 'https://platzibadgesreact-noewo1z8.b4a.run'
   
 jobs:

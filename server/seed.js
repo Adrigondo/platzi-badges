@@ -1,23 +1,23 @@
 const fs = require('fs');
 const path = require('path');
-const faker = require('faker');
+const falso = require('@ngneat/falso');
 const md5 = require('md5');
 
 function createBadges(limit = 50) {
   const result = [];
 
   for (let i = 0; i < limit; i++) {
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const email = faker.internet.email();
+    const firstName = falso.randFirstName();
+    const lastName = falso.randLastName();
+    const email = falso.randEmail();
 
     result.push({
-      id: faker.random.uuid(),
+      id: falso.randUuid(),
       firstName,
       lastName,
       email,
-      jobTitle: faker.name.jobTitle(),
-      twitter: `${firstName}${lastName}${faker.address.zipCode()}`,
+      jobTitle: falso.randJobTitle(),
+      twitter: `${firstName}${lastName}${falso.randUserName()}`,
       avatarUrl: `https://www.gravatar.com/avatar/${md5(email)}?d=identicon`,
     });
   }

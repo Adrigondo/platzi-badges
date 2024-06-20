@@ -27,7 +27,7 @@ concurrency:
   
 env:
   VITE_REPO_NAME: ${{ github.event.repository.name }}
-  VITE_SERVER_URL='https://platzibadgesreact-noewo1z8.b4a.run'
+  VITE_SERVER_URL: 'https://platzibadgesreact-noewo1z8.b4a.run'
   
 jobs:
   # Single deploy job since we're just deploying

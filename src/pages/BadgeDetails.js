@@ -82,6 +82,7 @@ const BadgeDetailsContainer = (props) => {
 
   const fetchData = async () => {
     setState({
+      ...state,
       loading: true,
       error: null,
     })
@@ -89,11 +90,13 @@ const BadgeDetailsContainer = (props) => {
     try {
       const data = await api.badges.read(badgeId)
       setState({
+        ...state,
         loading: false,
         data: data,
       })
     } catch (error) {
       setState({
+        ...state,
         loading: false,
         error: error,
       })
@@ -102,24 +105,31 @@ const BadgeDetailsContainer = (props) => {
   }
 
   const handleOpenModal = e => {
-    setState({ modalIsOpen: true })
+    setState({
+      ...state, modalIsOpen: true
+    })
   }
   const handleCloseModal = e => {
-    setState({ modalIsOpen: false })
+    setState({
+      ...state, modalIsOpen: false
+    })
   }
   const handleDeleteBadge = async e => {
     setState({
+      ...state,
       loading: true,
       error: null,
     })
     try {
       await api.badges.remove(badgeId);
       setState({
+        ...state,
         loading: true,
       })
       navigate("/badges");
     } catch (error) {
       setState({
+        ...state,
         loading: false,
         error: error,
       })

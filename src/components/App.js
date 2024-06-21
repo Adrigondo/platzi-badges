@@ -26,7 +26,6 @@ const router = createBrowserRouter([
 })
 
 function App() {
-  console.log("VITE_REPO_NAME:", import.meta.env.VITE_REPO_NAME);
   return (
     <RouterProvider router={router} />
   );

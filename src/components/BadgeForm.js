@@ -11,11 +11,11 @@ class BadgeForm extends React.Component{
       [e.target.name]: e.target.value,
     })
   };
-  handleClick = e =>{
-    console.log({
-      "Event": "Button was clicked",
-    });
-  }
+  // handleClick = e =>{
+  //   console.log({
+  //     "Event": "Button was clicked",
+  //   });
+  // }
   // handleSubmit= e =>{
   //   // Prevent the sumbit of the form
   //   e.preventDefault();
@@ -77,7 +77,7 @@ class BadgeForm extends React.Component{
             </div>
 
             {/* Si el botton es de tipo boton, no enviará el formulario, si es de tipo submit, enviará el formulario(y recargará la página por default) */}
-            <button type="submit" onClick={this.handleClick} className="btn btn-primary mt-4">Save</button>
+            <button type="submit" className="btn btn-primary mt-4">Save</button>
 
             {this.props.error &&(
               <div className="text-center mt-2">

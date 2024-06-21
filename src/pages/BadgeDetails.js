@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import api from "../api";
 
@@ -11,9 +11,9 @@ import DeleteBadgeModal from "../components/modals/DeleteBadgeModal";
 import "./styles/BadgeDetails.css";
 import confLogo from '../images/platziconf-logo.svg';
 
-function BadgeDetails(props){
-  const badge=props.badge;
-  return(
+const BadgeDetails = (props) => {
+  const badge = props.badge;
+  return (
     <React.Fragment>
       <div className="BadgeDetails__hero">
         <div className="container">
@@ -27,11 +27,11 @@ function BadgeDetails(props){
           </div>
         </div>
       </div>
-      
+
       <div className="container">
         <div className="row">
           <div className="col-5 offset-2">
-            <Badge 
+            <Badge
               firstName={badge.firstName || "First Name"}
               lastName={badge.lastName || "Last Name"}
               jobTitle={badge.jobTitle || "Job title"}
@@ -46,7 +46,7 @@ function BadgeDetails(props){
                 <Link to={`/badges/${badge.id}/edit`} className="btn btn-primary btn-lg">Edit</Link>
               </div>
               <div className="d-grid gap-2">
-                <button 
+                <button
                   className="btn btn-danger btn-lg"
                   onClick={props.onOpenModal}
                 >
@@ -62,86 +62,91 @@ function BadgeDetails(props){
           </div>
         </div>
       </div>
-    </React.Fragment> 
+    </React.Fragment>
   )
 }
 
-class BadgeDetailsContainer extends React.Component{
-  state={
+const BadgeDetailsContainer = (props) => {
+  const [state, setState] = useState({
     loading: true,
     error: null,
     data: undefined,
-    modalIsOpen:false,
-  };
-  componentDidMount(){
-    this.fetchData();
-  }
-  fetchData= async () =>{
-    this.setState({
+    modalIsOpen: false,
+  });
+  const navigate = useNavigate();
+  let { badgeId } = useParams();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setState({
       loading: true,
       error: null,
     })
-    
-    try{
-      const data= await api.badges.read(this.props.match.params.badgeId)
-      this.setState({
+
+    try {
+      const data = await api.badges.read(badgeId)
+      setState({
         loading: false,
         data: data,
       })
-    }catch(error){
-      this.setState({
+    } catch (error) {
+      setState({
         loading: false,
         error: error,
       })
+      console.error(error);
     }
   }
 
-  handleOpenModal = e =>{
-    this.setState({modalIsOpen:true})
+  const handleOpenModal = e => {
+    setState({ modalIsOpen: true })
   }
-  handleCloseModal = e =>{
-    this.setState({modalIsOpen:false})
+  const handleCloseModal = e => {
+    setState({ modalIsOpen: false })
   }
-  handleDeleteBadge=async e=>{
-    this.setState({
+  const handleDeleteBadge = async e => {
+    setState({
       loading: true,
       error: null,
     })
-    try{
-      await api.badges.remove(this.props.match.params.badgeId);
-      this.setState({
+    try {
+      await api.badges.remove(badgeId);
+      setState({
         loading: true,
       })
-      this.props.history.push("/badges");
-    }catch(error){
-      this.setState({
+      navigate("/badges");
+    } catch (error) {
+      setState({
         loading: false,
         error: error,
       })
+      console.error(error);
     }
   }
-  render(){
-    if(this.state.loading){
-      return(
-        <PageLoading />
-      );
-    }
-    if(this.state.error){
-      return(
-        <PageError error={this.state.error}/>
-      );
-    }
-    return(
-      <BadgeDetails
-        badge={this.state.data}
 
-        onCloseModal={this.handleCloseModal}
-        onOpenModal={this.handleOpenModal}
-        modalIsOpen={this.state.modalIsOpen}
-        onDeleteBadge={this.handleDeleteBadge}
-      />
+  if (state.loading) {
+    return (
+      <PageLoading />
     );
   }
+  if (state.error) {
+    return (
+      <PageError error={state.error} />
+    );
+  }
+  return (
+    <BadgeDetails
+      badge={state.data}
+
+      onCloseModal={handleCloseModal}
+      onOpenModal={handleOpenModal}
+      modalIsOpen={state.modalIsOpen}
+      onDeleteBadge={handleDeleteBadge}
+    />
+  );
 }
 
 export default BadgeDetailsContainer;
